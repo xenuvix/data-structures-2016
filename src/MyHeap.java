@@ -26,6 +26,8 @@ public class MyHeap {
     }
 
     public void DeleteMax() {
+
+
     }
 
     private void heapify(Person[] persons, int index) {

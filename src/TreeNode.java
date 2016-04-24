@@ -4,10 +4,6 @@ public class TreeNode {
     private TreeNode left;
     private TreeNode right;
 
-    public Person getData() {
-        return data;
-    }
-
     private Person data;
 
     public TreeNode(Person data) {
@@ -46,5 +42,13 @@ public class TreeNode {
 
     public void setRight(TreeNode right) {
         this.right = right;
+    }
+
+    public Person getData() {
+        return data;
+    }
+
+    public void setData(Person data) {
+        this.data = data;
     }
 }

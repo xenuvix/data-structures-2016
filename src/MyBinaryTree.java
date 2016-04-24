@@ -103,9 +103,6 @@ public class MyBinaryTree {
         // Start from the last node
         TreeNode currentNode = last;
 
-        // Set a flag which indicates if the last pointer should be updated
-        boolean lastFlag = false;
-
         // Loop as long as the child is older than its parent and we haven't
         // got to the root
 
@@ -113,77 +110,15 @@ public class MyBinaryTree {
                 (currentNode.getData().getAge() >
                         currentNode.getParent().getData().getAge())) {
 
-            TreeNode currentNodeParent = currentNode.getParent();
-
-            moveChildUp(currentNode, currentNodeParent);
-
-            // Should occur only after the first swap
-            if (!lastFlag) {
-                last = currentNodeParent;
-                lastFlag = true;
-            }
+            swapNodes(currentNode, currentNode.getParent());
+            currentNode = currentNode.getParent();
         }
     }
 
-    private void moveChildUp(TreeNode child, TreeNode parent) {
-
-        // Switch parents
-        child.setParent(parent.getParent());
-        parent.setParent(child);
-
-        // In case the child is the left child of the parent
-        if (child == parent.getLeft()) {
-            parent.setLeft(child.getLeft());
-            TreeNode parentRightNode = parent.getRight();
-            parent.setRight(child.getRight());
-            child.setLeft(parent);
-            child.setRight(parentRightNode);
-
-            // Update the parent of the other nodes
-            if (null != parentRightNode) {
-                parentRightNode.setParent(child);
-            }
-        }
-
-        // In case the child is the right child of the parent
-        else {
-            parent.setRight(child.getRight());
-            TreeNode parentLeftNode = parent.getLeft();
-            parent.setLeft(child.getLeft());
-            child.setRight(parent);
-            child.setLeft(parentLeftNode);
-
-            // Update the parent of the other nodes
-            if (null != parentLeftNode) {
-                parentLeftNode.setParent(child);
-            }
-        }
-
-        // Update child's childes to the new parent
-
-        if (null != parent.getLeft()) {
-            parent.getLeft().setParent(parent);
-        }
-
-        if (null != parent.getRight()) {
-            parent.getRight().setParent(parent);
-        }
-
-        // Update the grandparent reference
-
-        // In case the parent is the root node, update the root member and exit
-        if (parent == root) {
-            root = child;
-            return;
-        }
-
-        // In case parent was a left child
-        if (parent == child.getParent().getLeft()) {
-            child.getParent().setLeft(child);
-        }
-        else {
-            child.getParent().setRight(child);
-        }
+    private void swapNodes(TreeNode first, TreeNode second) {
+        Person temp = first.getData();
+        first.setData(second.getData());
+        second.setData(temp);
     }
 
     // Queue here is just for testing purpose!
