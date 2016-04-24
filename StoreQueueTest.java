@@ -30,7 +30,7 @@ public class StoreQueueTest {
 	     System.out.println(sq.returnNthPersonInRecord(3).getId());
 	     System.out.println((sq.firstInQueue()).getId());
 	     sq.deleteNthPersonFromRecord(9);
-	     System.out.println(sq.returnPersonFromRecord(321).getAge);
+	     System.out.println(sq.returnPersonFromRecord(321).getAge());
 	     System.out.println(sq.returnNthPersonInRecord(9));
 	     System.out.println(sq.returnNthPersonInRecord(8).getId());
 
