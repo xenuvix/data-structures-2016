@@ -63,33 +63,18 @@ public class MyBinaryTree {
             root = new TreeNode(person);
         }
 
-        String binaryRepresentationOfNextFreeIndex = Integer.toBinaryString(size + 1);
+        // Get the parent node for our new node
+        TreeNode parentOfNodeToInsert = getNodeAtIndex((size + 1) / 2);
 
-        // Travel to the last parent node
-        TreeNode currentNode = root;
-        int stringSize = binaryRepresentationOfNextFreeIndex.length();
-        for (int i = 1; i < stringSize - 1; i++) {
-            char currentBitAsAscii = binaryRepresentationOfNextFreeIndex.charAt(i);
-
-            // If the bit is 0, we move to the left child, if 1, we move to the right child
-
-            if (currentBitAsAscii == '0') {
-                currentNode = currentNode.getLeft();
-            }
-            else {
-                currentNode = currentNode.getRight();
-            }
-        }
-
-        // Create the new node ot insert
-        TreeNode newNode = new TreeNode(person, currentNode);
+        // Create the new node to insert
+        TreeNode newNode = new TreeNode(person, parentOfNodeToInsert);
 
         // Check the last bit and create the new node
-        if (binaryRepresentationOfNextFreeIndex.charAt(stringSize - 1) == '0') {
-            currentNode.setLeft(newNode);
+        if (null == parentOfNodeToInsert.getLeft()) {
+            parentOfNodeToInsert.setLeft(newNode);
         }
         else {
-            currentNode.setRight(newNode);
+            parentOfNodeToInsert.setRight(newNode);
         }
 
         // Update the last pointer and the size of the tree
@@ -145,6 +130,102 @@ public class MyBinaryTree {
             nextLevel = new LinkedList<TreeNode>();
 
         }
+    }
 
+    void replaceFirstAndLastElement() {
+        if (isEmpty()) {
+            throw new RuntimeException(
+                    "The tree is empty, cannot replace first and last elements");
+        }
+
+        swapNodes(root, last);
+    }
+
+    void removeLastElement() {
+        if (isEmpty()) {
+            throw new RuntimeException(
+                    "The tree is empty, cannot remove the last element");
+        }
+
+        // Remove the last node from the tree
+
+        TreeNode lastParent = last.getParent();
+
+        // Check if last is the left or right child of his parent
+        if (lastParent.getLeft() == last) {
+            lastParent.setLeft(null);
+        } else {
+            lastParent.setLeft(null);
+        }
+
+        last.setParent(null);
+
+        // Update tree size
+        --size;
+
+        // Update last
+        last = getNodeAtIndex(size);
+    }
+
+    /*
+        O(log(N))
+     */
+    TreeNode getNodeAtIndex(int index) {
+
+        String binaryRepresentationOfIndex =
+                Integer.toBinaryString(index);
+
+        // Travel to the index
+
+        TreeNode currentNode = root;
+        int stringSize = binaryRepresentationOfIndex.length();
+        for (int i = 1; i < stringSize; i++) {
+            char currentBitAsAscii = binaryRepresentationOfIndex.charAt(i);
+
+            // If the bit is 0, we move to the left child, if 1, we move to the right child
+
+            if (currentBitAsAscii == '0') {
+                currentNode = currentNode.getLeft();
+            }
+            else {
+                currentNode = currentNode.getRight();
+            }
+        }
+       return currentNode;
+    }
+
+    void heapify() {
+
+        TreeNode currentNode = root;
+        TreeNode leftChild = currentNode.getLeft();
+        TreeNode rightChild = currentNode.getRight();
+
+        while (
+                (null != leftChild) ||
+                        (null != rightChild)
+                ) {
+
+            TreeNode largest = currentNode;
+
+            if (largest.getData().getAge() < leftChild.getData().getAge()) {
+                largest = leftChild;
+            }
+
+            if (largest.getData().getAge() < rightChild.getData().getAge()) {
+                largest = rightChild;
+            }
+
+            if (largest == currentNode) {
+                break;
+            }
+            else {
+                swapNodes(currentNode, largest);
+                currentNode = largest;
+            }
+
+            // Update left and right child for the iteration
+            leftChild = currentNode.getLeft();
+            rightChild = currentNode.getRight();
+        }
     }
 }

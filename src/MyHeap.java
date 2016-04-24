@@ -27,7 +27,9 @@ public class MyHeap {
 
     public void DeleteMax() {
 
-
+        heapBinaryTree.replaceFirstAndLastElement();
+        heapBinaryTree.removeLastElement();
+        heapBinaryTree.heapify();
     }
 
     private void heapify(Person[] persons, int index) {
@@ -55,7 +57,7 @@ public class MyHeap {
             }
         }
 
-        // If a child is older, we make a swap and make a recurssive call
+        // If a child is older, we make a swap and make a recursive call
 
         if (oldestPerson != index) {
 
