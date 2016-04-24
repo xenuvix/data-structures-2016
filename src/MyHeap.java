@@ -1,40 +1,28 @@
 public class MyHeap {
 
-    private int size;
-    private Person[] persons;
+    private MyBinaryTree heapBinaryTree;
 
     public MyHeap(Person[] p, int numPeople) {
 
-        // Clone the given array into the current instance
-        persons = p.clone();
-
-        // Run heapify algorithm on each node except of the leaves
+        // Run heapify algorithm on each node except of the leaves, O(N)
         for (int i = (numPeople / 2) - 1; i >= 0; i--) {
-            heapify(persons, i);
+            heapify(p, i);
         }
 
-        size = numPeople;
+        // Convert the array into a binary tree, O(N)
+        heapBinaryTree = new MyBinaryTree(p);
     }
 
-    /**
-     * For testing purpose
-     */
-    public Person[] getInnerArrayRepresantaion() {
-        return persons;
-    }
-
-    /**
-     * Should decide if the object is return by reference or by value
-     */
     public Person FindMax() {
-        if (size > 0 ) {
-            return persons[0];
+        if (!heapBinaryTree.isEmpty()) {
+            return heapBinaryTree.root.getData();
         }
-
         throw new IndexOutOfBoundsException("There are no people in this heap");
     }
 
     public void insert(Person p) {
+        heapBinaryTree.insert(p);
+        heapBinaryTree.perculateUp();
     }
 
     public void DeleteMax() {
@@ -77,6 +65,10 @@ public class MyHeap {
 
             heapify(persons, oldestPerson);
         }
+    }
+
+    public void printHeap() {
+        heapBinaryTree.printTree();
     }
 
     private static int getLeftChildIndex(Person[] persons, int index) {

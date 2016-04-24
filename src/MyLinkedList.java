@@ -12,10 +12,4 @@ public class MyLinkedList {
 
 	public void delete(Person p) {
 	}
-
-	public boolean isEmpty() {
-	}
-
-    public Person removeFirst() {
-    }
 }
