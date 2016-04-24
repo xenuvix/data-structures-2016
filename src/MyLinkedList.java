@@ -1,15 +1,15 @@
 public class MyLinkedList {
-	private Node head;
+    private Node head;
 
-	public MyLinkedList() {
-	}
+    public MyLinkedList() {
+    }
 
-	public void insert(Person p) {
-	}
+    public void insert(Person p) {
+    }
 
-	public Person find(int id) {
-	}
+    public Person find(int id) {
+    }
 
-	public void delete(Person p) {
-	}
+    public void delete(Person p) {
+    }
 }

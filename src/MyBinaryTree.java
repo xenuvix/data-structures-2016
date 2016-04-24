@@ -2,12 +2,23 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * This class represents a binary tree with additional features specifically
+ * for a binary heap.
+ * The tree is indexed based on breadth-first order.
+ * Note that this tree is only capable of holding Person data objects
+ */
 public class MyBinaryTree {
 
     TreeNode root;
     TreeNode last;
     int size;
 
+    /**
+     * Construct a binary tree from an array representation of a binary heap.
+     *
+     * @param binaryTreeArrayRepresentation Array representation of a binary heap.
+     */
     public MyBinaryTree(Person[] binaryTreeArrayRepresentation) {
 
         // Create a temporary array to allow the construction of the tree
@@ -52,10 +63,18 @@ public class MyBinaryTree {
         size = binaryTreeArrayRepresentation.length;
     }
 
+    /**
+     * @return True if the binary tree is empty
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Insert a Person object into the binary tree after the last current object.
+     *
+     * @param person A reference to the person object to be inserted
+     */
     public void insert(Person person) {
 
         // In case our tree is empty
@@ -72,8 +91,7 @@ public class MyBinaryTree {
         // Check the last bit and create the new node
         if (null == parentOfNodeToInsert.getLeft()) {
             parentOfNodeToInsert.setLeft(newNode);
-        }
-        else {
+        } else {
             parentOfNodeToInsert.setRight(newNode);
         }
 
@@ -83,13 +101,17 @@ public class MyBinaryTree {
 
     }
 
+    /**
+     * Moves up the last element in the tree as long as his age is greater
+     * than his parent age.
+     */
     public void perculateUp() {
 
         // Start from the last node
         TreeNode currentNode = last;
 
-        // Loop as long as the child is older than its parent and we haven't
-        // got to the root
+        // Loop as long as the child is older than its parent and we did not
+        // arrive to the root node
 
         while (currentNode.getParent() != null &&
                 (currentNode.getData().getAge() >
@@ -100,39 +122,19 @@ public class MyBinaryTree {
         }
     }
 
+    /**
+     * Swap two nodes in the tree.
+     */
     private void swapNodes(TreeNode first, TreeNode second) {
         Person temp = first.getData();
         first.setData(second.getData());
         second.setData(temp);
     }
 
-    // Queue here is just for testing purpose!
-    public void printTree(){
-        Queue<TreeNode> currentLevel = new LinkedList<TreeNode>();
-        Queue<TreeNode> nextLevel = new LinkedList<TreeNode>();
-
-        currentLevel.add(root);
-
-        while (!currentLevel.isEmpty()) {
-            Iterator<TreeNode> iter = currentLevel.iterator();
-            while (iter.hasNext()) {
-                TreeNode currentNode = iter.next();
-                if (currentNode.getLeft() != null) {
-                    nextLevel.add(currentNode.getLeft());
-                }
-                if (currentNode.getRight() != null) {
-                    nextLevel.add(currentNode.getRight());
-                }
-                System.out.print(currentNode.getData().getAge() + " ");
-            }
-            System.out.println();
-            currentLevel = nextLevel;
-            nextLevel = new LinkedList<TreeNode>();
-
-        }
-    }
-
-    void replaceFirstAndLastElement() {
+    /**
+     * Swap the root node and the last node in the tree.
+     */
+    void swapRootAndLastNode() {
         if (isEmpty()) {
             throw new RuntimeException(
                     "The tree is empty, cannot replace first and last elements");
@@ -141,7 +143,10 @@ public class MyBinaryTree {
         swapNodes(root, last);
     }
 
-    void removeLastElement() {
+    /**
+     * Removes the last node from the tree
+     */
+    void removeLastNode() {
         if (isEmpty()) {
             throw new RuntimeException(
                     "The tree is empty, cannot remove the last element");
@@ -167,8 +172,11 @@ public class MyBinaryTree {
         last = getNodeAtIndex(size);
     }
 
-    /*
-        O(log(N))
+    /**
+     * Finds the node at a given index with complexity of O(log(n))
+     *
+     * @param index The given index in the tree to be found
+     * @return A reference to the specific node
      */
     TreeNode getNodeAtIndex(int index) {
 
@@ -186,14 +194,17 @@ public class MyBinaryTree {
 
             if (currentBitAsAscii == '0') {
                 currentNode = currentNode.getLeft();
-            }
-            else {
+            } else {
                 currentNode = currentNode.getRight();
             }
         }
-       return currentNode;
+        return currentNode;
     }
 
+    /**
+     * Same as the heapify method in MyHeap class, this time implemented
+     * on a binary tree
+     */
     void heapify() {
 
         TreeNode currentNode = root;
@@ -217,8 +228,7 @@ public class MyBinaryTree {
 
             if (largest == currentNode) {
                 break;
-            }
-            else {
+            } else {
                 swapNodes(currentNode, largest);
                 currentNode = largest;
             }
@@ -226,6 +236,34 @@ public class MyBinaryTree {
             // Update left and right child for the iteration
             leftChild = currentNode.getLeft();
             rightChild = currentNode.getRight();
+        }
+    }
+
+    /**
+     * Purely for testing purpose!
+     */
+    public void printTree() {
+        Queue<TreeNode> currentLevel = new LinkedList<TreeNode>();
+        Queue<TreeNode> nextLevel = new LinkedList<TreeNode>();
+
+        currentLevel.add(root);
+
+        while (!currentLevel.isEmpty()) {
+            Iterator<TreeNode> iter = currentLevel.iterator();
+            while (iter.hasNext()) {
+                TreeNode currentNode = iter.next();
+                if (currentNode.getLeft() != null) {
+                    nextLevel.add(currentNode.getLeft());
+                }
+                if (currentNode.getRight() != null) {
+                    nextLevel.add(currentNode.getRight());
+                }
+                System.out.print(currentNode.getData().getAge() + " ");
+            }
+            System.out.println();
+            currentLevel = nextLevel;
+            nextLevel = new LinkedList<TreeNode>();
+
         }
     }
 }

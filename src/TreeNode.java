@@ -1,10 +1,16 @@
+/**
+ * Represents a node in a binary tree
+ * This node is only capable to hold Person data objects
+ */
 public class TreeNode {
 
     private TreeNode parent;
     private TreeNode left;
     private TreeNode right;
-
     private Person data;
+
+    // All the methods are pretty straight foreword, some basic constructors
+    // with getters and setters
 
     public TreeNode(Person data) {
         this.data = data;
