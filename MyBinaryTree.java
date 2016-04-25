@@ -10,9 +10,9 @@ import java.util.Queue;
  */
 public class MyBinaryTree {
 
-    TreeNode root;
-    TreeNode last;
-    int size;
+    private TreeNode root;
+    private TreeNode last;
+    private int size;
 
     /**
      * Construct a binary tree from an array representation of a binary heap.
@@ -25,7 +25,7 @@ public class MyBinaryTree {
         // Java will initiate each of the object to null by default
         TreeNode[] nodesTreeOrder = new TreeNode[binaryTreeArrayRepresentation.length + 1];
 
-        // Create the the nodes inside the temp array, O(N).
+        // Create the nodes inside the temp array, O(N).
         for (int i = 0; i < binaryTreeArrayRepresentation.length; i++) {
             nodesTreeOrder[i + 1] = new TreeNode(binaryTreeArrayRepresentation[i]);
         }
@@ -61,6 +61,13 @@ public class MyBinaryTree {
 
         // Set the size for this binary tree
         size = binaryTreeArrayRepresentation.length;
+    }
+
+    /**
+     * Return the current root of this tree
+     */
+    Person getRoot() {
+        return root.getData();
     }
 
     /**

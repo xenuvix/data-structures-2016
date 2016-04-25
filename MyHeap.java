@@ -35,7 +35,7 @@ public class MyHeap {
      */
     public Person FindMax() {
         if (!heapBinaryTree.isEmpty()) {
-            return heapBinaryTree.root.getData();
+            return heapBinaryTree.getRoot();
         }
         throw new IndexOutOfBoundsException("There are no people in this heap");
     }
@@ -82,14 +82,14 @@ public class MyHeap {
         int oldestPerson = index;
 
         if (indexInsideArray(persons, leftChildIndex)) {
-            if (persons[leftChildIndex].getAge() >=
+            if (persons[leftChildIndex].getAge() >
                     persons[index].getAge()) {
                 oldestPerson = leftChildIndex;
             }
         }
 
         if (indexInsideArray(persons, rightChildIndex)) {
-            if (persons[rightChildIndex].getAge() >=
+            if (persons[rightChildIndex].getAge() >
                     persons[oldestPerson].getAge()) {
                 oldestPerson = rightChildIndex;
             }
