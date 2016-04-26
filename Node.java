@@ -19,10 +19,4 @@ public class Node<T> {
     Node(T data) {
         this(data, null);
     }
-    
-    /** Returns the data of this node, as a string.
-     */
-    public String toString() {
-        return "" + data;
-    }
 }
