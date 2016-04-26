@@ -48,6 +48,7 @@ public class MyLinkedList {
         while (cur != null) {
             if (cur.data.getId() == id)
                 return cur.data;
+            cur = cur.next;
         }
 
         // Person with correct id wasn't found.

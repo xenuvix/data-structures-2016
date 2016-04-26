@@ -81,7 +81,7 @@ public class StoreQueue {
         if (n <= 0 || n > record.getSize()) return null;
 
         Node<Person> current = record.getHead();
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n - 1; i++) {
             current = current.next;
         }
         return current.data;
@@ -91,7 +91,7 @@ public class StoreQueue {
         if (n <= 0 || n > record.getSize()) return;
 
         Node<Person> current = record.getHead();
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n - 1; i++) {
             current = current.next;
         }
         record.delete(current.data);
