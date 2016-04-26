@@ -1,7 +1,9 @@
 public class StoreQueue {
 
-    public StoreQueue() {
+    private MyHeap priorityQueue;
 
+    public StoreQueue() {
+        priorityQueue = new MyHeap();
     }
 
     public StoreQueue(Person[] p, int numPeople) {

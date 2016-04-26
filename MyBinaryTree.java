@@ -15,6 +15,15 @@ public class MyBinaryTree {
     private int size;
 
     /**
+     * Construct an empty binary tree
+     */
+    public MyBinaryTree() {
+        root = null;
+        last = null;
+        size = 0;
+    }
+
+    /**
      * Construct a binary tree from an array representation of a binary heap.
      *
      * @param binaryTreeArrayRepresentation Array representation of a binary heap.
@@ -87,6 +96,9 @@ public class MyBinaryTree {
         // In case our tree is empty
         if (isEmpty()) {
             root = new TreeNode(person);
+            last = root;
+            ++size;
+            return;
         }
 
         // Get the parent node for our new node
@@ -105,14 +117,13 @@ public class MyBinaryTree {
         // Update the last pointer and the size of the tree
         last = newNode;
         ++size;
-
     }
 
     /**
      * Moves up the last element in the tree as long as his age is greater
      * than his parent age.
      */
-    public void perculateUp() {
+    void perculateUp() {
 
         // Start from the last node
         TreeNode currentNode = last;
@@ -141,7 +152,7 @@ public class MyBinaryTree {
     /**
      * Swap the root node and the last node in the tree.
      */
-    void swapRootAndLastNode() {
+    void swapRootAndLastNode() throws RuntimeException {
         if (isEmpty()) {
             throw new RuntimeException(
                     "The tree is empty, cannot replace first and last elements");
@@ -153,7 +164,7 @@ public class MyBinaryTree {
     /**
      * Removes the last node from the tree
      */
-    void removeLastNode() {
+    void removeLastNode() throws RuntimeException {
         if (isEmpty()) {
             throw new RuntimeException(
                     "The tree is empty, cannot remove the last element");
