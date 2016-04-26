@@ -12,6 +12,13 @@ public class MyHeap {
     private MyBinaryTree heapBinaryTree;
 
     /**
+     * Construct an empty binary heap
+     */
+    public MyHeap() {
+        heapBinaryTree = new MyBinaryTree();
+    }
+
+    /**
      * Construct a binary heap from array of Person objects.
      *
      * @param p         The given array to be transformed into a binary heap
@@ -33,11 +40,11 @@ public class MyHeap {
      *
      * @return A reference to the oldest person in the heap
      */
-    public Person FindMax() {
+    public Person FindMax() throws RuntimeException {
         if (!heapBinaryTree.isEmpty()) {
             return heapBinaryTree.getRoot();
         }
-        throw new IndexOutOfBoundsException("There are no people in this heap");
+        throw new RuntimeException("There are no people in this heap");
     }
 
     /**
@@ -54,7 +61,7 @@ public class MyHeap {
     /**
      * Delete the oldest person in the heap, while keeping the heap well organized.
      */
-    public void DeleteMax() {
+    public void DeleteMax() throws RuntimeException {
 
         heapBinaryTree.swapRootAndLastNode();
         heapBinaryTree.removeLastNode();
