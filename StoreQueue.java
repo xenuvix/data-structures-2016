@@ -1,12 +1,14 @@
 public class StoreQueue {
 
     private MyHeap priorityQueue;
+    private MyLinkedList record;
 
     /**
      * Construct an empty store queue.
      */
     public StoreQueue() {
         priorityQueue = new MyHeap();
+        record = new MyLinkedList();
     }
 
     /**
@@ -17,6 +19,19 @@ public class StoreQueue {
      */
     public StoreQueue(Person[] p, int numPeople) {
         priorityQueue = new MyHeap(p, numPeople);
+        record = new MyLinkedList();
+        fillRecord(p);
+    }
+
+    /**
+     * Fills the record with a given Person array.
+     * @param p             An array representing the queue, where p[0]
+     *                      is the first person and p[length - 1] is the last
+     */
+    private void fillRecord(Person[] p) {
+        for (int i = 0; i < p.length; i++) {
+            record.insert(p[i]);
+        }
     }
 
     /**
@@ -25,6 +40,7 @@ public class StoreQueue {
      */
     public void enqueue(Person person) {
         priorityQueue.insert(person);
+        record.insert(person);
     }
 
     /**
@@ -62,16 +78,32 @@ public class StoreQueue {
     }
 
     public Person returnNthPersonInRecord(int n) {
+        if (n <= 0 || n > record.getSize()) return null;
 
+        Node<Person> current = record.getHead();
+        for (int i = 0; i < n - 1; i++) {
+            current = current.next;
+        }
+        return current.data;
     }
 
     public void deleteNthPersonFromRecord(int n) {
+        if (n <= 0 || n > record.getSize()) return;
+
+        Node<Person> current = record.getHead();
+        for (int i = 0; i < n - 1; i++) {
+            current = current.next;
+        }
+        record.delete(current.data);
     }
 
     public Person returnPersonFromRecord(int id) {
-
+        return record.find(id);
     }
 
     public void deletePersonFromRecord(int id) {
+        Person person = record.find(id);
+        if (person == null) return;
+        record.delete(person);
     }
 }

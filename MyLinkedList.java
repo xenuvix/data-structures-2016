@@ -5,6 +5,9 @@ public class MyLinkedList {
     // Pointer to last element of the list.
     private Node<Person> last;
 
+    // Size of current LinkedList
+    private int size;
+
     /**
      * Construct an empty list.
      */
@@ -12,6 +15,7 @@ public class MyLinkedList {
     {
         head = null;
         last = null;
+        size = 0;
 	}
 
     /**
@@ -30,6 +34,7 @@ public class MyLinkedList {
 			last.next = new Node<>(p, null);
             last = last.next;
 		}
+        size++;
 	}
 
     /**
@@ -43,6 +48,7 @@ public class MyLinkedList {
         while (cur != null) {
             if (cur.data.getId() == id)
                 return cur.data;
+            cur = cur.next;
         }
 
         // Person with correct id wasn't found.
@@ -78,6 +84,23 @@ public class MyLinkedList {
 
         //delete cur node
         prev.next = cur.next;
+        size--;
 	}
+
+    /**
+     * Returns head of list for iteration.
+     * @return Node<Person<>
+     */
+    public Node<Person> getHead() {
+        return head;
+    }
+
+    /**
+     * Returns current size of LinkedList.
+     * @return int of size
+     */
+    public int getSize() {
+        return size;
+    }
 
 }
