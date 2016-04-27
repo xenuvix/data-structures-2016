@@ -178,7 +178,7 @@ public class MyBinaryTree {
         if (lastParent.getLeft() == last) {
             lastParent.setLeft(null);
         } else {
-            lastParent.setLeft(null);
+            lastParent.setRight(null);
         }
 
         last.setParent(null);
@@ -261,6 +261,7 @@ public class MyBinaryTree {
      * Purely for testing purpose!
      */
     public void printTree() {
+        System.out.println("*****");
         Queue<TreeNode> currentLevel = new LinkedList<TreeNode>();
         Queue<TreeNode> nextLevel = new LinkedList<TreeNode>();
 
@@ -283,5 +284,6 @@ public class MyBinaryTree {
             nextLevel = new LinkedList<TreeNode>();
 
         }
+        System.out.println("*****");
     }
 }
