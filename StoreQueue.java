@@ -77,6 +77,11 @@ public class StoreQueue {
         }
     }
 
+    /**
+     * Returns person in n-1 index.
+     * @param n: element number.
+     * @return Person found.
+     */
     public Person returnNthPersonInRecord(int n) {
         if (n <= 0 || n > record.getSize()) return null;
 
@@ -87,6 +92,10 @@ public class StoreQueue {
         return current.data;
     }
 
+    /**
+     * Deletes person in n-1 index.
+     * @param n: element number.
+     */
     public void deleteNthPersonFromRecord(int n) {
         if (n <= 0 || n > record.getSize()) return;
 
@@ -97,10 +106,19 @@ public class StoreQueue {
         record.delete(current.data);
     }
 
+    /**
+     * Returns person with given id.
+     * @param id: id number.
+     * @return Person found with given id.
+     */
     public Person returnPersonFromRecord(int id) {
         return record.find(id);
     }
 
+    /**
+     * Deletes person with given id from record.
+     * @param id: id number.
+     */
     public void deletePersonFromRecord(int id) {
         Person person = record.find(id);
         if (person == null) return;

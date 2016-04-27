@@ -258,7 +258,7 @@ public class MyBinaryTree {
     }
 
     /**
-     * Purely for testing purpose!
+     * Purely for testing purpose! No need to check this.
      */
     public void printTree() {
         System.out.println("*****");
